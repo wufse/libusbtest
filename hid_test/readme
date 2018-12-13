@@ -1,0 +1,15 @@
+libusb在安装的时候  
+配置选项为./configure --build=i686-linux --host=arm-linux --prefix=/home/wang/libusb_test/arm_lib CC=arm-none-linux-gnueabi-gcc CXX=arm-none-linux-gnueabi-g++ --disable-udev
+
+配置过程出现configure: error: "udev support requested but libudev not installed"
+试试配置的过程加上 --disable-udev 然后安装成功
+
+
+交叉编译使用动态链接编译通过 静态链接的时候链接出错 
+
+/home/wang/libusb-1.0.21/libusb/core.c:714: undefined reference to `pthread_mutex_lock
+等等
+指定 -lpthread就ok了 估计是需要链接下多线程相关的函数了
+
+
+hid.c 中列出说有usb设备相关信息  并使用libusb这一库在2440上直接使用API访问usb hid设备 ，比如鼠标键盘
